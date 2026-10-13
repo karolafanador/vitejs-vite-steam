@@ -1,0 +1,419 @@
+
+/* ==========================================
+   MONITOR CARDÍACO
+   Diseño oscuro y adaptable
+   ========================================== */
+
+   :root {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #f9fafb;
+    background: #111827;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --background: #111827;
+    --card: #1f2937;
+    --card-light: #273449;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --blue: #60a5fa;
+    --green: #22c55e;
+    --red: #ef4444;
+    --border: #374151;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
+    background: #2563eb;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Contenedor principal */
+
+.container {
+    width: min(100% - 32px, 900px);
+    margin: 0 auto;
+    padding: 30px 0 40px;
+}
+
+/* Encabezado */
+
+header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    letter-spacing: -0.7px;
+}
+
+header p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+/* Conexión USB */
+
+.connection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 18px;
+    margin-bottom: 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.connection > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#connectionText {
+    font-size: 0.95rem;
+    color: #e5e7eb;
+}
+
+.indicator {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.indicator.offline {
+    background: #6b7280;
+    box-shadow: 0 0 8px #6b728044;
+}
+
+.indicator.online {
+    background: var(--green);
+    box-shadow: 0 0 10px #22c55e88;
+}
+
+/* Tarjeta principal de medición */
+
+.bpm-card {
+    padding: 30px 20px;
+    margin-bottom: 22px;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px #00000018;
+}
+
+.heart {
+    margin-bottom: 8px;
+    font-size: 2.2rem;
+}
+
+#bpmValue {
+    font-size: clamp(4rem, 12vw, 6rem);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -3px;
+    color: var(--blue);
+    overflow-wrap: anywhere;
+}
+
+.bpm-label {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* Oxígeno */
+
+.spo2-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: 28px auto 20px;
+    padding: 20px;
+    max-width: 340px;
+    background: var(--card-light);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.spo2-icon {
+    font-size: 1.8rem;
+}
+
+#spo2Value {
+    color: #a78bfa;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.spo2-unit {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.spo2-label {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Estado */
+
+.status {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 6px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.status.normal {
+    color: #86efac;
+    background: #14532d66;
+    border: 1px solid #166534;
+}
+
+.status.high {
+    color: #fca5a5;
+    background: #7f1d1d66;
+    border: 1px solid #991b1b;
+}
+
+/* Estadísticas */
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 22px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.stat strong {
+    color: white;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    overflow-wrap: anywhere;
+}
+
+/* Configuración del límite */
+
+.settings {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.settings label {
+    color: #e5e7eb;
+    font-weight: 600;
+}
+
+.settings input {
+    width: 95px;
+    padding: 10px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    outline: none;
+    background: #111827;
+    color: white;
+}
+
+.settings input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px #60a5fa22;
+}
+
+.settings span {
+    color: var(--muted);
+}
+
+/* Gráfica */
+
+.graph-card {
+    margin-bottom: 22px;
+    padding: 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.graph-card h2 {
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+}
+
+#heartChart {
+    display: block;
+    width: 100%;
+    height: 280px;
+}
+
+/* Alerta */
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
+    padding: 20px;
+    color: #fecaca;
+    background: #7f1d1d44;
+    border: 1px solid #dc2626;
+    border-radius: 15px;
+    font-size: 1.6rem;
+}
+
+.alert strong {
+    font-size: 1.1rem;
+    color: #fca5a5;
+}
+
+.alert p {
+    margin: 7px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #fecaca;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Información inferior */
+
+.info {
+    padding: 8px 10px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.info p {
+    margin: 7px 0;
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 600px) {
+    .container {
+        width: min(100% - 20px, 900px);
+        padding-top: 22px;
+    }
+
+    .connection {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .connection button {
+        width: 100%;
+    }
+
+    .bpm-card {
+        padding: 25px 14px;
+    }
+
+    .statistics {
+        gap: 8px;
+    }
+
+    .stat {
+        padding: 17px 7px;
+        gap: 10px;
+    }
+
+    .stat span {
+        font-size: 0.75rem;
+    }
+
+    .settings {
+        gap: 10px;
+    }
+
+    .settings label {
+        width: 100%;
+    }
+
+    .graph-card {
+        padding: 16px 12px;
+    }
+
+    #heartChart {
+        height: 240px;
+    }
+}

@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Cardíaco</title>
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <h1>❤️ Monitor Cardíaco</h1>
+            <p>Sistema de adquisición de frecuencia cardíaca</p>
+        </header>
+
+        <section class="connection">
+            <div>
+                <span id="connectionIndicator" class="indicator offline"></span>
+                <span id="connectionText">Arduino desconectado</span>
+            </div>
+
+            <button id="connectButton" type="button">
+                🔌 Conectar por USB
+            </button>
+        </section>
+
+        <section class="bpm-card">
+            <div class="heart">❤️</div>
+            <div id="bpmValue">--</div>
+            <div class="bpm-label">BPM</div>
+
+            <div class="spo2-container">
+                <div class="spo2-icon">🩸</div>
+                <div>
+                    <span id="spo2Value">--</span>
+                    <span class="spo2-unit">%</span>
+                </div>
+                <div class="spo2-label">
+                    Saturación de oxígeno (SpO₂)
+                </div>
+            </div>
+
+            <div id="status" class="status normal">
+                Esperando datos...
+            </div>
+        </section>
+
+        <section class="statistics">
+            <div class="stat">
+                <span>BPM actual</span>
+                <strong id="currentBpm">--</strong>
+            </div>
+
+            <div class="stat">
+                <span>BPM máximo</span>
+                <strong id="maxBpm">--</strong>
+            </div>
+
+            <div class="stat">
+                <span>BPM promedio</span>
+                <strong id="averageBpm">--</strong>
+            </div>
+        </section>
+
+        <section class="settings">
+            <label for="threshold">Límite máximo de alerta:</label>
+            <input
+                type="number"
+                id="threshold"
+                value="160"
+                min="50"
+                max="220">
+            <span>BPM</span>
+        </section>
+
+        <section class="graph-card">
+            <h2>📈 Frecuencia cardíaca</h2>
+            <canvas id="heartChart"></canvas>
+        </section>
+
+        <section id="alertBox" class="alert hidden">
+            🚨
+            <div>
+                <strong>ALERTA</strong>
+                <p>La frecuencia cardíaca está fuera del rango configurado.</p>
+            </div>
+        </section>
+
+        <section class="info">
+            <p>
+                Datos recibidos desde Arduino UNO mediante conexión USB.
+            </p>
+            <p>
+                Este proyecto es educativo y no sustituye un dispositivo médico.
+            </p>
+        </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
